@@ -78,34 +78,3 @@ section.portfolio .works > .small:first-child{
 section.portfolio .works > .small:nth-child(2){
     top: 298px;left: 644px;
 }*/
-.loading{
-    width: 200px;
-    height: 200px;
-    border: 1px solid red;
-    position: relative;
-}
-.loading::before,.loading::after{
-    content: '';
-    width: 0;
-    height: 0;
-    position: absolute;
-    background: #000;
-    border-radius: 50%;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: auto;
-    animation: s 1.5s linear infinite;
-}
-.loading::after{
-    animation-delay: 0.75s;
-}
-@keyframes s{
-    0%{
-        width: 0px; height: 0px; opacity:1;
-    }
-    100%{
-        width: 50px; height: 50px; opacity:0;
-    }
-}
