@@ -7,31 +7,34 @@ h1,h2,h3,h4,h5,h6{font-weight: normal;}
 body{background: #EFEFEF;}
 .clearfix::after{content: '';display: block;clear: both;}
 
-.topNavBar{position: fixed;top: 0;left: 0;width: 100%;color: #C2C4C6;
-transition: all 0.5s;
-    padding: 10px 0;
-}
-.topNavBar.sticky{
-    background: white;
-    padding: 6px 0;
-    z-index: 1;
-    box-shadow: 0px 8px 10px 1px rgba(0,0,0,0.75);
-    color: #3d4451;
-}
+.topNavBar{position: fixed;top: 0;left: 0;width: 100%;color: #C2C4C6;transition: all 0.5s;padding: 10px 0;}
+.topNavBar.sticky{background: white;padding: 6px 0;z-index: 1;box-shadow: 0px 8px 10px 1px rgba(0,0,0,0.75);color: #3d4451;}
 .topNavBar-inner{padding: 0 15px;}
 .navBar{float: right;}
-.topNavBar-inner>a{float: left;}
+.topNavBar-inner > a{float: left;}
 
 .topNavBar-inner .logo{font-size: 30px;color: #E86767;font-family: "Fredoka One";padding-top: 5px;padding-bottom: 3px;
 }
 .topNavBar-inner .logo .RS{margin-right: 3px;color: #e8676b;
 }
-.topNavBar-inner .logo .card{color: #9a9da2;
+.topNavBar-inner .logo .card{color: #9a9da2;}
+.topNavBar-inner > nav > ul > li{float: left;margin-left: 17px;margin-right: 17px;position: relative;}
+.topNavBar-inner > nav > ul > li > a{font-family: "Open Sans";font-size: 13px;color: inherit;font-weight: bold;padding-top: 12px;padding-bottom: 12px;display: block;border-bottom: 3px solid transparent;border-top: 3px solid transparent;position: relative;}
+.topNavBar-inner > nav > ul > li > a:hover::after{content: '';display: block;position: absolute;top: 100%;left: 0;width: 100%;background: #E8666B;height: 3px;animation: menuslide .3s}
+@keyframes menuslide {
+    0%{width: 0;}
+    100%{width: 100%;} }
+.topNavBar .submenu{
+    display: none;
 }
-.topNavBar-inner>nav li{float: left;margin-left: 17px;margin-right: 17px;
+.topNavBar .submenu.active{
+    display: block;
+    float: left;
+    position: absolute;
 }
-.topNavBar-inner>nav li>a:hover{border-bottom: 3px solid #E8666B;}
-.topNavBar-inner>nav li>a{font-family: "Open Sans";font-size: 13px;color: inherit;font-weight: bold;padding-top: 12px;padding-bottom: 12px;display: block;border-bottom: 3px solid transparent;border-top: 3px solid transparent;}
+.topNavBar .submenu > li{
+    white-space: nowrap;    //不允许换行
+}
 .banner{height: 515px;background-image: url(./picture/rs-cover.jpg);background-position: center center;background-size: cover;}
 .banner .mask{height: 515px;background-color: rgba(0,0,0,0.8);}
 body> main{margin-top: -340px;}

@@ -48,9 +48,21 @@
                 <span class="RS">RS</span><span class="card">card</span></a>
             <nav class="navBar">
                 <ul class="clearfix">
-                    <li><a href="#">关于</a></li>
+                    <li><a class="menuTigger" href="#">关于</a>
+                        <ul class="submenu">
+                            <li>关于1</li>
+                            <li>关于2</li>
+                            <li>关于3</li>
+                        </ul>
+                    </li>
                     <li><a href="#">技能</a></li>
-                    <li><a href="#">项目</a></li>
+                    <li><a class="menuTigger" href="#">项目</a>
+                        <ul class="submenu">
+                            <li>项目1</li>
+                            <li>项目2</li>
+                            <li>项目3</li>
+                        </ul>
+                    </li>
                     <li><a href="#">经验</a></li>
                 </ul>
             </nav>
@@ -189,6 +201,25 @@
             topNavBar.classList.add('sticky')
         }else {
             topNavBar.classList.remove('sticky')
+        }
+    }
+    let aTags = document.getElementsByClassName('menuTigger')
+    for(let i = 0; i<aTags.length; i++){
+        aTags[i].onmouseenter = function (x) {
+            let a = x.currentTarget
+            let brother = a.nextSibling
+            while(brother.tagName !== 'UL'){
+                brother = brother.nextSibling
+            }
+            brother.classList.add('active')
+        }
+        aTags[i].onmouseleave = function (x) {
+            let a = x.currentTarget
+            let brother = a.nextSibling
+            while(brother.tagName !== 'UL'){
+                brother = brother.nextSibling
+            }
+            brother.classList.remove('active')
         }
     }
 </script>
