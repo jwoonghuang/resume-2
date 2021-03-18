@@ -12,7 +12,7 @@
         .loading{width: 200px;height: 200px;position: relative;}
         .loading::before,.loading::after{content: '';width: 0;height: 0;position: absolute;background: #000;border-radius: 50%;top: 0;left: 0;right: 0;bottom: 0;margin: auto;animation: s 1.5s linear infinite;}
         .loading::after{animation-delay: 0.75s;}
-        @keyframes s{ 0%{width: 0px; height: 0px; opacity:1;} 100%{width: 50px; height: 50px; opacity:0;} }
+        @keyframes s{ 0%{width: 0; height: 0; opacity:1;} 100%{width: 50px; height: 50px; opacity:0;} }
 
         .site-welcome{
             display: none;
@@ -221,10 +221,24 @@
         aTags[i].onclick = function (x){
             x.preventDefault()
             let a = x.currentTarget
-            let href = a.getAttribute('href')
+            let href = a.getAttribute('href')  //'#siteAbout'
             let element = document.querySelector(href)
             let top = element.offsetTop
-            window.scrollTo(0,top - 80)
+
+            let n = 5
+            let duraction = 500 / n
+            let currentTop = window.scrollY
+            let targetTop = top - 80
+            let distance = (targetTop - currentTop) / n
+            let i = 0
+            let id = setInterval(()=> {
+                if(i === n){
+                    window.clearInterval(id)
+                    return
+                }
+                i++
+                window.scrollTo(0,currentTop + distance * i)
+                },duraction)
         }
     }
 </script>
