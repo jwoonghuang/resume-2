@@ -75,7 +75,7 @@
         <div class="mask"></div>
     </div>
     <main>
-        <div id="siteAbout" class="userCard">
+        <div data-x id="siteAbout" class="userCard">
             <div class="textAndPicture clearfix">
                 <div class="picture">
                     <img src="./picture/avatar.jpg"  alt="photo">
@@ -125,7 +125,7 @@
         <a class="downloadResume" href="./document/resume.pdf" target="_blank" download>DOWNLOAD RESUME</a>
     </p>
     <P class="selfIntroduction">Hello! I’m Robert Smith. Senior Web Developer specializing in front end development. Experienced with all stages of the development cycle for dynamic web projects. Well-versed in numerous programming languages including JavaScript, SQL, and C. Stng background in project management and customer relations.</P>
-<section id="siteSkills" class="skills">
+<section data-x id="siteSkills" class="skills">
     <h2>专业技能</h2>
     <ol class="clearfix">
         <li>
@@ -161,7 +161,7 @@
         </div>
     </ol>
 </section>
-<section class="portfolio" id="siteProjects">
+<section  data-x class="portfolio" id="siteProjects">
     <h2>作品集</h2>
     <nav>
     <ol class="clearfix">
@@ -199,12 +199,39 @@
         siteWelcome.classList.remove('active')
     },1000)
 
+    let specialTags = document.querySelectorAll('[data-x]')
+    for (let i = 0; i<specialTags.length; i++){
+        specialTags[i].classList.add('offset')
+    }          //添加offset类
+
+    setTimeout(function (){
+        findClosest()
+    },100)
+    findClosest()
     window.onscroll = function () {
         if (window.scrollY > 0){
             topNavBar.classList.add('sticky')
         }else {
             topNavBar.classList.remove('sticky')
         }
+        findClosest()
+    }
+    function findClosest(){
+        let specialTags = document.querySelectorAll('[data-x]')
+        let minIndex = 0
+        for (let i = 1; i<specialTags.length; i++){
+            if (Math.abs(specialTags[i].offsetTop - window.scrollY) < Math.abs(specialTags[minIndex].offsetTop - window.scrollY))
+                minIndex = i
+        }     //minIndex就是离窗口顶部最近的元素
+        specialTags[minIndex].classList.remove('offset')
+        let id = specialTags[minIndex].id
+        let a = document.querySelector('a[href="#'+ id +'"]')
+        let li = a.parentNode
+        let brothersAndMe = li.parentNode.children
+        for (let i = 0;i<brothersAndMe.length;i++){
+            brothersAndMe[i].classList.remove('highlight')
+        }
+        li.classList.add('highlight')
     }
 
     let liTags = document.querySelectorAll('nav.menu > ul >li')
@@ -233,17 +260,17 @@
 
             let currentTop = window.scrollY
             let targetTop = top - 80
-            let s = targetTop - currentTop
-            var coords = {y: currentTop}
-            var t = Math.abs((s/100)*300)
+            let s = targetTop - currentTop  //移动路程
+            var coords = {y: currentTop}    //起始位置
+            var t = Math.abs((s/100)*300)   //时间
             if (t>500){t = 500}
             var tween = new TWEEN.Tween(coords)   //初始位置currentTop
                 .to({y: targetTop}, t)      //目标位置targetTop，时间
                 .easing(TWEEN.Easing.Quadratic.InOut)  //缓动函数类型
-                .onUpdate(function () {    //每次变化时，所执行的代码
-                    window.scrollTo(0,coords.y)
+                .onUpdate(function () {    //每次变化时，所执行的代码，coords.y已经变了
+                    window.scrollTo(0,coords.y)   //如何更新页面
                 })
-                .start()
+                .start()   //开始缓动
         }
     }
 </script>
